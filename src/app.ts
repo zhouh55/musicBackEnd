@@ -1,5 +1,6 @@
 import * as Koa from 'koa';
 import * as KoaLogger from 'koa-logger';
+import { connectMongoDB } from './dataBase/conectDB';
 import Middlewares from './middlewares/index';
 const IS_DEV = process.env.NODE_ENV === 'dev'; 
 class Application {
@@ -28,6 +29,7 @@ class Application {
 
     start(port: number) {
         this.app.listen( port, () => {
+            connectMongoDB();
             console.log( `Koa server running port：${port}` );
         })
     }
