@@ -23,4 +23,5 @@ export default class AccountController {
     static async loginOut() {
 
     }
+
 }

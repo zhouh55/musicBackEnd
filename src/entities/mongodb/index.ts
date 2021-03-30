@@ -1,6 +1,6 @@
-import { API } from "./api";
+import { User } from "./user";
 
 
 export const MongodbEntities: any[] = [
-    API
+    User
 ]

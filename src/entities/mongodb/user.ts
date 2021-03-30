@@ -1,8 +1,8 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity } from 'typeorm';
 import { BaseEntity } from "./baseModel";
 
-@Entity('api')
-export class API extends BaseEntity {
+@Entity('User')
+export class User extends BaseEntity {
     @Column()
     name: string;
 

@@ -7,7 +7,7 @@ import { MongodbEntities } from '../entities/mongodb/index';
 const IS_DEV = process.env.NODE_ENV === 'dev';
 const connectMongoDB = (): Promise<void> => {
     return createConnection( {
-        name: mongoDBConfig.name,
+        // name: mongoDBConfig.name,
         type: 'mongodb',
         host: mongoDBConfig.host,
         port: mongoDBConfig.port,
@@ -15,9 +15,12 @@ const connectMongoDB = (): Promise<void> => {
         entities: MongodbEntities,
         logging: IS_DEV ? true : false,
         useNewUrlParser: true, 
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        synchronize: true
     } )
-    .then( connect => console.log( 'open mongodb success!' ) )
+    .then( connect => {
+        console.log( 'open mongodb success!' )
+    } )
     .catch( err => console.log( 'connect fail mongodb', err ) )
 }
 

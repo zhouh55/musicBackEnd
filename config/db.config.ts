@@ -1,7 +1,7 @@
 const mongoDBConfig = {
-    name: 'Mongo',
+    name: 'music',
     type: 'mongodb',
-    host: 'localhost/music',
+    host: 'localhost',
     port: 27017,
     username: '',
     password: '',
