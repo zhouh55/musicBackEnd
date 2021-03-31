@@ -30,7 +30,7 @@ class Application {
     start(port: number) {
         this.app.listen( port, () => {
             connectMongoDB();
-            console.log( `Koa server running port：${port}` );
+            console.log( `Koa server running port：${ port }` );
         })
     }
 }

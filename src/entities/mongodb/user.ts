@@ -4,7 +4,7 @@ import { BaseEntity } from "./baseModel";
 @Entity('User')
 export class User extends BaseEntity {
     @Column()
-    name: string;
+    name?: string;
 
     @Column()
     account: string;

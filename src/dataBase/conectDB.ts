@@ -16,7 +16,7 @@ const connectMongoDB = (): Promise<void> => {
         logging: IS_DEV ? true : false,
         useNewUrlParser: true, 
         useUnifiedTopology: true,
-        synchronize: true
+        synchronize: false // 可开启同步数据库
     } )
     .then( connect => {
         console.log( 'open mongodb success!' )

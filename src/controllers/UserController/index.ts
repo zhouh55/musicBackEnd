@@ -6,16 +6,18 @@ type LoginReqBody = {
     account: string,
     password: string
 }
-export default class AccountController {
+export default class UserController {
     // GET
     static async getAllUser( ctx: Context ) {
         const result = await getMongoRepository(User).find();
-        console.log( result );
-        
-        const data: IReturnData = {
+        let data: IReturnData = {
             code: 200,
-            data: [],
-            message: ''
+            data: result || [],
+            message: '查询成功！'
+        }
+        if( !result ) {
+            data.code = 500
+            data.message = '查询失败！'
         }
         ctx.body = data;
     }
@@ -28,14 +30,15 @@ export default class AccountController {
         user.account = account;
         user.password = password;
         
-        getMongoRepository(User).save(user)
-        console.log( user );
-        
-        console.log( account, password );
-        const data: IReturnData = {
+        const result = await getMongoRepository(User).save(user);
+        let data: IReturnData = {
             code: 200,
-            data: [],
-            message: ''
+            message: '创建成功！'
+        }
+
+        if( !result ) {
+            data.message = '创建失败！'
+            data.code = 500;
         }
         ctx.body = data;
     }
