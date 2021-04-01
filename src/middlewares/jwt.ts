@@ -1,10 +1,8 @@
 import * as JWT from 'koa-jwt'
-const IS_DEV = process.env.NODE_ENV === 'dev'
-
+import { secret } from '../core/secret'
 const NO_AUTH_URLS = [ /api\/login/ ]
 
-
+// 请求的时候要附带  Bearer + 空格
 export default JWT({
-    debug: IS_DEV ? true : false,
-    secret: 'a1'
+    secret: secret
 }).unless( { path: NO_AUTH_URLS } )

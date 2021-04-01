@@ -1,6 +1,7 @@
 import { Context } from '@core/koa';
 import { IReturnData } from '@src/@types/global';
 import { getMongoManager } from 'typeorm';
+import { generateToken } from '../../core/jwt';
 import { User } from '../../entities/mongodb/user';
 type LoginReqBody = {
     account: string,
@@ -18,13 +19,17 @@ export default class AccountController {
                 password: password
             }
         } );
-        
         let data: IReturnData = {
             code: 200,
-            data: result,
+            data: '',
             message: '登录成功！'
         }
-        if( !result ) {
+        if( result ) {
+            data.data = {
+                token: generateToken( { payload: result } )
+            }
+        }
+        else {
             data.code = 400
             data.message = '账号或密码错误！'
         }
