@@ -4,7 +4,8 @@ import { getMongoRepository } from 'typeorm';
 import { User } from '../../entities/mongodb/user';
 type LoginReqBody = {
     account: string,
-    password: string
+    password: string,
+    name: string
 }
 export default class UserController {
     // GET
@@ -24,9 +25,9 @@ export default class UserController {
 
     // POST
     static async addUser( ctx: Context ) {
-        const { account, password }: LoginReqBody = ctx.request.body;
+        const { account, password, name }: LoginReqBody = ctx.request.body;
         let user = new User();
-        user.name = 'Bears';
+        user.name = name || 'Bears';
         user.account = account;
         user.password = password;
         

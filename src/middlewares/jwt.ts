@@ -1,5 +1,5 @@
 import * as JWT from 'koa-jwt'
-import { secret } from '../core/secret'
+import { secret } from '../core/jwt/index'
 const NO_AUTH_URLS = [ /api\/login/ ]
 
 // 请求的时候要附带  Bearer + 空格

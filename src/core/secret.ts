@@ -1,1 +1,0 @@
-export const secret = 'my_app_secret'

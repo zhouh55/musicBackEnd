@@ -1,16 +1,19 @@
 import * as JsonWebToken from 'jsonwebtoken';
-import { secret } from '../../core/secret';
+const secret = 'my_app_secret';
+const NO_AUTH_URLS = [ '/api/login' ]
 
 type GenerateTokenOptions = {
     payload: object
 }
 const generateToken = ( options: GenerateTokenOptions ) => {
     const { payload } = options;
-    const token = JsonWebToken.sign( { ...payload }, secret, { expiresIn:  '1h' });
-    return token;
+    const sign = JsonWebToken.sign( { ...payload }, secret, { expiresIn:  '1h' });
+    return `Bearer ${ sign }`;
 }
 
 export {
-    generateToken
+    generateToken,
+    secret,
+    NO_AUTH_URLS
 };
 
