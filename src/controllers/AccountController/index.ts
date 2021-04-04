@@ -1,11 +1,12 @@
 import { Context } from '@core/koa';
 import { IReturnData } from '@src/@types/global';
-import { getMongoManager } from 'typeorm';
+import { getMongoManager, getMongoRepository } from 'typeorm';
 import { generateToken } from '../../core/jwt';
 import { User } from '../../entities/mongodb/user';
 type LoginReqBody = {
     account: string,
-    password: string
+    password: string,
+    name?: string
 }
 export default class AccountController {
     // POST
@@ -36,6 +37,28 @@ export default class AccountController {
         
         ctx.body = data;
     }
+
+     // POST
+     static async register( ctx: Context ) {
+        const { account, password, name }: LoginReqBody = ctx.request.body;
+        let user = new User();
+        user.name = name || 'Bears';
+        user.account = account;
+        user.password = password;
+        
+        const result = await getMongoRepository(User).save(user);
+        let data: IReturnData = {
+            code: 200,
+            message: '注册成功'
+        }
+
+        if( !result ) {
+            data.message = '注册失败！'
+            data.code = 500;
+        }
+        ctx.body = data;
+    }
+
 
     // POST
     static async loginOut() {

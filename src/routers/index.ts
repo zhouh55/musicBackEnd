@@ -5,6 +5,7 @@ const router = new Router();
 
 router
     .post( '/api/login', AccountController.login )
+    .post( '/api/register', AccountController.register )
     .post( '/api/loginOut', AccountController.loginOut )
     .get( '/api/getAllUser', UserController.getAllUser)
     .post( '/api/addUser', UserController.addUser)

@@ -1,6 +1,6 @@
 import * as JsonWebToken from 'jsonwebtoken';
 const secret = 'my_app_secret';
-const NO_AUTH_URLS = [ '/api/login' ]
+const NO_AUTH_URLS = [ '/api/login', '/api/register' ]
 
 type GenerateTokenOptions = {
     payload: object
