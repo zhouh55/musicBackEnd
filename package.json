@@ -1,13 +1,16 @@
 {
   "name": "musicBackEnd",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.ts",
   "repository": "https://github.com/zhouh55/musicBackEnd.git",
   "author": "zhouh <1069230911@qq.com>",
   "license": "MIT",
   "scripts": {
     "dev": "SET NODE_ENV=dev&&nodemon --config nodemon.json",
     "build": "tsc"
+  },
+  "_moduleAliases": {
+    "@entities": "./dist"
   },
   "dependencies": {
     "dayjs": "^1.10.4",
@@ -19,6 +22,7 @@
     "koa-jwt": "^4.0.0",
     "koa-router": "^10.0.0",
     "koa-static": "^5.0.0",
+    "module-alias": "^2.2.2",
     "mongodb": "^3.6.5",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.31"

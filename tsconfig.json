@@ -15,10 +15,11 @@
         "./node_modules/@types/",
         "./src/@types/"
       ],
-      "baseUrl": ".",
+      "baseUrl": "./",
       "paths": {
-        "@config/*": ["config/*"],
         "@src/*": ["src/*"],
+
+        "@config/*": ["config/*"],
         "@controllers/*": ["src/controllers/*"],
         "@core/*": ["src/core/*"],
         "@models/*": ["src/models/*"],

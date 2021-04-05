@@ -1,7 +1,10 @@
 import * as Koa from 'koa';
 import * as KoaLogger from 'koa-logger';
+// import 'module-alias/register';
 import { connectMongoDB } from './dataBase/conectDB';
 import Middlewares from './middlewares/index';
+// alias(path.resolve(__dirname, '../'));
+
 const IS_DEV = process.env.NODE_ENV === 'dev'; 
 class Application {
     private app: Koa
