@@ -1,12 +1,14 @@
 import { Context } from '@core/koa';
-import { IReturnData } from '@src/@types/global';
 import { getMongoManager, getMongoRepository } from 'typeorm';
 import { generateToken } from '../../core/jwt';
 import { User } from '../../entities/mongodb/user';
-type LoginReqBody = {
+import { getResponseDataFormat } from '../../utils/publicFunction';
+interface LoginReqBody  {
     account: string,
-    password: string,
-    name?: string
+    password: string
+}
+interface RegisterReqBody extends LoginReqBody {
+    name: string
 }
 export default class AccountController {
     // POST
@@ -20,15 +22,14 @@ export default class AccountController {
                 password: password
             }
         } );
-        let data: IReturnData = {
-            code: 200,
-            data: '',
-            message: '登录成功！'
-        }
+        
+        let data = getResponseDataFormat();
+        
         if( result ) {
             data.data = {
                 token: generateToken( { payload: result } )
             }
+            data.message = '登录成功！';
         }
         else {
             data.code = 400
@@ -40,17 +41,14 @@ export default class AccountController {
 
      // POST
      static async register( ctx: Context ) {
-        const { account, password, name }: LoginReqBody = ctx.request.body;
+        const { account, password, name }: RegisterReqBody = ctx.request.body;
         let user = new User();
         user.name = name || 'Bears';
         user.account = account;
         user.password = password;
         
         const result = await getMongoRepository(User).save(user);
-        let data: IReturnData = {
-            code: 200,
-            message: '注册成功'
-        }
+        let data = getResponseDataFormat( { code: 200, message: '注册成功！' } );
 
         if( !result ) {
             data.message = '注册失败！'
